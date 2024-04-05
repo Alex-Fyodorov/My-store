@@ -1,7 +1,7 @@
 package gb.mystore.core.converters;
 
-import gb.mystore.core.dtos.NewUserDto;
-import gb.mystore.core.dtos.UserDto;
+import gb.mystore.api.dtos.NewUserDto;
+import gb.mystore.api.dtos.UserDto;
 import gb.mystore.core.entities.Role;
 import gb.mystore.core.entities.User;
 import org.springframework.stereotype.Component;

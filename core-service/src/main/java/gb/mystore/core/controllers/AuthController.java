@@ -1,7 +1,7 @@
 package gb.mystore.core.controllers;
 
-import gb.mystore.core.dtos.JwtRequest;
-import gb.mystore.core.dtos.JwtResponse;
+import gb.mystore.api.dtos.JwtRequest;
+import gb.mystore.api.dtos.JwtResponse;
 import gb.mystore.core.exceptions.AppError;
 import gb.mystore.core.services.UserService;
 import gb.mystore.core.utils.JwtTokenUtil;

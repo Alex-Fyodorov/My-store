@@ -1,9 +1,10 @@
 package gb.mystore.core.controllers;
 
+import gb.mystore.api.dtos.ProductDto;
 import gb.mystore.core.converters.ProductConverter;
 import gb.mystore.core.exceptions.ResourceNotFoundException;
 import gb.mystore.core.entities.Product;
-import gb.mystore.core.dtos.ProductDto;
+
 import gb.mystore.core.services.ProductService;
 import gb.mystore.core.validators.ProductValidator;
 import lombok.RequiredArgsConstructor;

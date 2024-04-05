@@ -1,8 +1,9 @@
-package gb.mystore.core.services;
+package gb.mystore.cart.services;
 
-import gb.mystore.core.entities.Cart;
-import gb.mystore.core.entities.Product;
-import gb.mystore.core.exceptions.ResourceNotFoundException;
+import gb.mystore.api.dtos.ProductDto;
+import gb.mystore.cart.integrations.ProductServiceIntegration;
+import gb.mystore.cart.utils.Cart;
+import gb.mystore.cart.exceptions.ResourceNotFoundException;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 @Service
 @RequiredArgsConstructor
 public class CartService {
-    private final ProductService productService;
+    private final ProductServiceIntegration productService;
     private Cart cart;
 
     @PostConstruct
@@ -27,9 +28,7 @@ public class CartService {
     }
 
     public void addProductToCart(Long productId, Integer delta) {
-        Product product = productService.findById(productId)
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        String.format("Product not found. id: %d", productId)));
+        ProductDto product = productService.findById(productId);
         cart.changeQuantity(product, delta);
     }
 

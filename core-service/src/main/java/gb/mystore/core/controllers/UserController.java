@@ -1,8 +1,8 @@
 package gb.mystore.core.controllers;
 
+import gb.mystore.api.dtos.NewUserDto;
+import gb.mystore.api.dtos.UserDto;
 import gb.mystore.core.converters.UserConverter;
-import gb.mystore.core.dtos.NewUserDto;
-import gb.mystore.core.dtos.UserDto;
 import gb.mystore.core.entities.User;
 import gb.mystore.core.services.UserService;
 import gb.mystore.core.validators.UserValidator;

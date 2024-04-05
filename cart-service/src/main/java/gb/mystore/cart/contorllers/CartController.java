@@ -1,14 +1,15 @@
-package gb.mystore.core.controllers;
+package gb.mystore.cart.contorllers;
 
-import gb.mystore.core.converters.CartConverter;
-import gb.mystore.core.dtos.CartDto;
-import gb.mystore.core.services.CartService;
+import gb.mystore.api.dtos.CartDto;
+import gb.mystore.cart.converters.CartConverter;
+import gb.mystore.cart.services.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/carts")
+@RequestMapping("/api/v1/current-cart")
+@CrossOrigin("*")
 public class CartController {
     private final CartService cartService;
     private final CartConverter cartConverter;

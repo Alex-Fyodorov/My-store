@@ -1,4 +1,4 @@
-package gb.mystore.core.dtos;
+package gb.mystore.cart.utils;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -9,10 +9,15 @@ import java.math.BigDecimal;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CartItemDto {
+public class CartItem {
     private Long productId;
     private String productTitle;
     private BigDecimal pricePerProduct;
     private Integer quantity;
     private BigDecimal price;
+
+    public void changeQuantity(Integer delta) {
+        quantity += delta;
+        price = BigDecimal.valueOf(quantity).multiply(pricePerProduct);
+    }
 }

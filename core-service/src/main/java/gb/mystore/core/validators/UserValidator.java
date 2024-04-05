@@ -1,6 +1,6 @@
 package gb.mystore.core.validators;
 
-import gb.mystore.core.dtos.NewUserDto;
+import gb.mystore.api.dtos.NewUserDto;
 import gb.mystore.core.services.UserService;
 import gb.mystore.core.entities.User;
 import gb.mystore.core.exceptions.ValidationException;

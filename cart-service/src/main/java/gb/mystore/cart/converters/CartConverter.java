@@ -1,9 +1,9 @@
-package gb.mystore.core.converters;
+package gb.mystore.cart.converters;
 
-import gb.mystore.core.dtos.CartDto;
-import gb.mystore.core.dtos.CartItemDto;
-import gb.mystore.core.entities.Cart;
-import gb.mystore.core.entities.CartItem;
+import gb.mystore.api.dtos.CartDto;
+import gb.mystore.api.dtos.CartItemDto;
+import gb.mystore.cart.utils.Cart;
+import gb.mystore.cart.utils.CartItem;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;

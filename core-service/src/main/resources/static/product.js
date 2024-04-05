@@ -1,6 +1,7 @@
 angular.module('appProduct', ['ngStorage']).controller('productController',
 function ($scope, $rootScope, $http, $localStorage) {
-    const contextPath = 'http://localhost:8190/app/api/v1';
+    const contextPathCore = 'http://localhost:8190/my-store-core/api/v1';
+    const contextPathCart = 'http://localhost:8191/cart/api/v1/current-cart';
 
 //При перезагрузке заставляет снова подвязывать токен к запросам
     if ($localStorage.springWebUser) {
@@ -21,7 +22,7 @@ function ($scope, $rootScope, $http, $localStorage) {
 
 //Вход в учётную запись
     $scope.tryToAuth = function() {
-        $http.post('http://localhost:8190/app/auth', $scope.user)
+        $http.post('http://localhost:8190/my-store-core/auth', $scope.user)
             .then(function successCallback(response) {
                 if (response.data.token) {
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
@@ -63,7 +64,7 @@ function ($scope, $rootScope, $http, $localStorage) {
 
 //Регистрация нового пользователя
     $scope.tryToRegistration = function() {
-        $http.post(contextPath + '/users', $scope.user)
+        $http.post(contextPathCore + '/users', $scope.user)
             .then(function successCallback(response) {
                 $rootScope.isNeedNewUser = false;
                 $scope.tryToAuth();
@@ -90,7 +91,7 @@ function ($scope, $rootScope, $http, $localStorage) {
 
 //Загрузка списка категорий
     $scope.loadCategories = function() {
-        $http.get(contextPath + '/categories')
+        $http.get(contextPathCore + '/categories')
             .then(function(response) {
                 console.log(response.data);
                 $CategoriesList = response.data;
@@ -100,7 +101,7 @@ function ($scope, $rootScope, $http, $localStorage) {
 //Загрузка списка продуктов
     $scope.loadProducts = function () {
         $http({
-            url: contextPath + '/products',
+            url: contextPathCore + '/products',
             method: 'get',
             params: {
                 page: $scope.loadProducts ? $scope.loadProducts.page : 1,
@@ -119,7 +120,7 @@ function ($scope, $rootScope, $http, $localStorage) {
 
 //Добавить продукт
     $scope.addProduct = function () {
-        $http.post(contextPath + '/products', $scope.newProduct)
+        $http.post(contextPathCore + '/products', $scope.newProduct)
             .then(function(response) {
                 $scope.loadProducts();
                 $scope.newProduct = null;
@@ -128,7 +129,7 @@ function ($scope, $rootScope, $http, $localStorage) {
 
 //Удалить продукт
     $scope.deleteProduct = function (productId) {
-        $http.delete(contextPath + '/products/' + productId).then(function(response) {
+        $http.delete(contextPathCore + '/products/' + productId).then(function(response) {
             $scope.loadProducts();
         });
     }
@@ -136,7 +137,7 @@ function ($scope, $rootScope, $http, $localStorage) {
 //Изменить цену продукта
     $scope.changePrice = function (productId, newPrice) {
         $http({
-            url:contextPath + '/products',
+            url:contextPathCore + '/products',
             method: 'patch',
             params: {
                 product_id: productId,
@@ -173,7 +174,7 @@ function ($scope, $rootScope, $http, $localStorage) {
 //Изменить количество продуктов в корзине или положить продукт в корзину
     $scope.changeQuantity = function (productId, delta) {
         $http({
-            url:contextPath + '/carts/add',
+            url:contextPathCart + '/add',
             method: 'get',
             params: {
                 product_id: productId,
@@ -186,7 +187,7 @@ function ($scope, $rootScope, $http, $localStorage) {
 
 //Загрузка списка корзины
     $scope.loadCart = function () {
-        $http.get(contextPath + '/carts').then(function(response) {
+        $http.get(contextPathCart).then(function(response) {
             console.log(response.data);
             $scope.CartList = response.data.items;
             $scope.totalPrice = response.data.totalPrice;
@@ -195,7 +196,7 @@ function ($scope, $rootScope, $http, $localStorage) {
 
 //Удалить продукт из корзины
     $scope.deleteFromCart = function (productId) {
-        $http.get(contextPath + '/carts/delete/' + productId).then(function(response) {
+        $http.get(contextPathCart + '/delete/' + productId).then(function(response) {
             $scope.loadCart();
         });
     }

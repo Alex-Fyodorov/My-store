@@ -2,7 +2,7 @@ package gb.mystore.core.converters;
 
 import gb.mystore.core.entities.Category;
 import gb.mystore.core.entities.Product;
-import gb.mystore.core.dtos.ProductDto;
+import gb.mystore.api.dtos.ProductDto;
 import gb.mystore.core.exceptions.ResourceNotFoundException;
 import gb.mystore.core.services.CategoryService;
 import lombok.RequiredArgsConstructor;

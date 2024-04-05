@@ -1,7 +1,7 @@
 package gb.mystore.core.controllers;
 
+import gb.mystore.api.dtos.CategoryDto;
 import gb.mystore.core.converters.CategoryConverter;
-import gb.mystore.core.dtos.CategoryDto;
 import gb.mystore.core.services.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;

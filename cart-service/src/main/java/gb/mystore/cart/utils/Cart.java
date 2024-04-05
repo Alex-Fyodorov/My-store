@@ -1,5 +1,6 @@
-package gb.mystore.core.entities;
+package gb.mystore.cart.utils;
 
+import gb.mystore.api.dtos.ProductDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +15,7 @@ public class Cart {
     private List<CartItem> items;
     private BigDecimal totalPrice;
 
-    public void changeQuantity(Product product, Integer delta) {
+    public void changeQuantity(ProductDto product, Integer delta) {
         for (CartItem item : items) {
             if (item.getProductId().equals(product.getId())) {
                 item.changeQuantity(delta);

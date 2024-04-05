@@ -11,6 +11,8 @@
 	<description>Demo project for Spring Boot</description>
 	<modules>
 		<module>core-service</module>
-	</modules>
+        <module>cart-service</module>
+        <module>api</module>
+    </modules>
 
 </project>

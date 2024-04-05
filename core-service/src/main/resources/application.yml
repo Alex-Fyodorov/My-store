@@ -1,7 +1,7 @@
 server:
   port: 8190
   servlet:
-    context-path: /app
+    context-path: /my-store-core
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver

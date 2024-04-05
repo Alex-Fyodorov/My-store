@@ -1,7 +1,7 @@
 package gb.mystore.core.validators;
 
 import gb.mystore.core.exceptions.ValidationException;
-import gb.mystore.core.dtos.ProductDto;
+import gb.mystore.api.dtos.ProductDto;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
