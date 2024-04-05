@@ -1,4 +1,4 @@
-package gb.mystore.core.aspect;
+package gb.mystore.cart.aspect;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 public class AppLoggingAspect {
 
-    @Around("execution(public * gb.mystore.core.controllers.*.*(..))")
+    @Around("execution(public * gb.mystore.cart.controllers.*.*(..))")
     public Object methodProfiling(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         long begin = System.currentTimeMillis();
         Object out = proceedingJoinPoint.proceed();

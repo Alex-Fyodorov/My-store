@@ -30,6 +30,7 @@ function ($scope, $rootScope, $http, $localStorage) {
                     $scope.user.username = null;
                     $scope.user.password = null;
                     $scope.loadCart();
+                    $scope.loadOrders();
                 }
             }, function errorCallback(response) {
                 alert("Incorrect username or password.")
@@ -201,7 +202,23 @@ function ($scope, $rootScope, $http, $localStorage) {
         });
     }
 
+// Оформить заказ
+    $scope.placeAnOrder = function() {
+        $http.get(contextPathCore + '/orders/create').then(function(response) {
+            $scope.loadCart();
+            $scope.loadOrders();
+        });
+    }
+
+// Загрузить список заказов
+    $scope.loadOrders = function() {
+        $http.get(contextPathCore + '/orders').then(function(response) {
+            $scope.OrdersList = response.data;
+        });
+    }
+
     $scope.loadCategories();
     $scope.loadProducts();
     $scope.loadCart();
+    $scope.loadOrders();
 });

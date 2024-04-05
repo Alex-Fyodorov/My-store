@@ -1,4 +1,4 @@
-package gb.mystore.cart.contorllers;
+package gb.mystore.cart.controllers;
 
 import gb.mystore.api.dtos.CartDto;
 import gb.mystore.cart.converters.CartConverter;
@@ -30,7 +30,7 @@ public class CartController {
         cartService.deleteProduct(productId);
     }
 
-    @GetMapping("/clear")
+    @DeleteMapping("/clear")
     public void clearCart() {
         cartService.clearCart();
     }
