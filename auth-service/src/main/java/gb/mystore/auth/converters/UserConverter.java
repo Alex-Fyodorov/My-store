@@ -1,9 +1,9 @@
-package gb.mystore.core.converters;
+package gb.mystore.auth.converters;
 
 import gb.mystore.api.dtos.NewUserDto;
 import gb.mystore.api.dtos.UserDto;
-import gb.mystore.core.entities.Role;
-import gb.mystore.core.entities.User;
+import gb.mystore.auth.entities.Role;
+import gb.mystore.auth.entities.User;
 import org.springframework.stereotype.Component;
 
 import java.util.stream.Collectors;

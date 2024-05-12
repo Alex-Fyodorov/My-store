@@ -1,4 +1,4 @@
-package gb.mystore.core.utils;
+package gb.mystore.auth.utils;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

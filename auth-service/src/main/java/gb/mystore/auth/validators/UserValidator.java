@@ -1,9 +1,9 @@
-package gb.mystore.core.validators;
+package gb.mystore.auth.validators;
 
 import gb.mystore.api.dtos.NewUserDto;
-import gb.mystore.core.services.UserService;
-import gb.mystore.core.entities.User;
-import gb.mystore.core.exceptions.ValidationException;
+import gb.mystore.auth.services.UserService;
+import gb.mystore.auth.entities.User;
+import gb.mystore.auth.exceptions.ValidationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

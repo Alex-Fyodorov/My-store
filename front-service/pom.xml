@@ -12,7 +12,7 @@
     <artifactId>front-service</artifactId>
     <packaging>jar</packaging>
 
-    <name>core-service</name>
+    <name>front-service</name>
     <url>http://maven.apache.org</url>
 
     <properties>

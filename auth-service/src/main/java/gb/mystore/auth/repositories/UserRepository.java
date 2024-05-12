@@ -1,6 +1,6 @@
-package gb.mystore.core.repositories;
+package gb.mystore.auth.repositories;
 
-import gb.mystore.core.entities.User;
+import gb.mystore.auth.entities.User;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

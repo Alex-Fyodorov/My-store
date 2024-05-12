@@ -1,9 +1,9 @@
-package gb.mystore.core.services;
+package gb.mystore.auth.services;
 
-import gb.mystore.core.entities.Role;
-import gb.mystore.core.entities.User;
-import gb.mystore.core.exceptions.ResourceNotFoundException;
-import gb.mystore.core.repositories.UserRepository;
+import gb.mystore.auth.entities.Role;
+import gb.mystore.auth.entities.User;
+import gb.mystore.auth.exceptions.ResourceNotFoundException;
+import gb.mystore.auth.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;

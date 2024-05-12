@@ -1,7 +1,7 @@
-package gb.mystore.core.services;
+package gb.mystore.auth.services;
 
-import gb.mystore.core.entities.Role;
-import gb.mystore.core.repositories.RoleRepository;
+import gb.mystore.auth.entities.Role;
+import gb.mystore.auth.repositories.RoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

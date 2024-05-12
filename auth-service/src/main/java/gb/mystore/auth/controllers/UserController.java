@@ -1,11 +1,11 @@
-package gb.mystore.core.controllers;
+package gb.mystore.auth.controllers;
 
 import gb.mystore.api.dtos.NewUserDto;
 import gb.mystore.api.dtos.UserDto;
-import gb.mystore.core.converters.UserConverter;
-import gb.mystore.core.entities.User;
-import gb.mystore.core.services.UserService;
-import gb.mystore.core.validators.UserValidator;
+import gb.mystore.auth.converters.UserConverter;
+import gb.mystore.auth.entities.User;
+import gb.mystore.auth.services.UserService;
+import gb.mystore.auth.validators.UserValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

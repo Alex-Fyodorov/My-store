@@ -1,12 +1,12 @@
-package gb.mystore.core.configs;
+package gb.mystore.auth.configs;
 
-import gb.mystore.core.services.UserService;
+import gb.mystore.auth.services.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.http.HttpMethod;
+//import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
@@ -17,7 +17,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.HttpStatusEntryPoint;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @Slf4j
@@ -26,7 +25,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
     private final UserService userService;
     //private final AuthenticationManager authenticationManager;
-    private final JwtRequestFilter jwtRequestFilter;
+    //private final JwtRequestFilter jwtRequestFilter;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -44,17 +43,17 @@ public class SecurityConfig {
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 // Для безопасности отключаются сессии. Теперь у контекста привязки к сессии нет.
                 .authorizeHttpRequests(authorise -> authorise
-                        .requestMatchers(HttpMethod.POST, "/api/v1/products").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PUT, "/api/v1/products").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.DELETE, "/api/v1/products").hasRole("ADMIN")
-                        .requestMatchers(HttpMethod.PATCH, "/api/v1/products").hasRole("ADMIN")
-                        .requestMatchers("api/v1/orders/**").authenticated()
+//                        .requestMatchers(HttpMethod.POST, "/api/v1/products").hasRole("ADMIN")
+//                        .requestMatchers(HttpMethod.PUT, "/api/v1/products").hasRole("ADMIN")
+//                        .requestMatchers(HttpMethod.DELETE, "/api/v1/products").hasRole("ADMIN")
+//                        .requestMatchers(HttpMethod.PATCH, "/api/v1/products").hasRole("ADMIN")
+//                        .requestMatchers("api/v1/orders/**").authenticated()
                         .requestMatchers("/auth").permitAll()
                         .anyRequest().permitAll())
                 .exceptionHandling(eh -> eh.authenticationEntryPoint(
                         new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))); // Обработка ошибок.
                 // В случае попытки несанкционированного запроса возвращает ошибку 401.
-        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+        //http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 

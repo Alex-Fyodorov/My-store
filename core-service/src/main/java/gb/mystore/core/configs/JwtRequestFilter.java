@@ -1,6 +1,6 @@
 package gb.mystore.core.configs;
 
-import gb.mystore.core.utils.JwtTokenUtil;
+//import gb.mystore.core.utils.JwtTokenUtil;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class JwtRequestFilter extends OncePerRequestFilter {
     private final UserDetailsService userDetailsService;
-    private final JwtTokenUtil jwtTokenUtil;
+    //private final JwtTokenUtil jwtTokenUtil;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -34,15 +34,15 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         String username = null;
         String jwt = null;
 
-        if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            jwt = authHeader.substring(7);
-            //log.info(String.format("Token: %s", jwt));
-            try {
-                username = jwtTokenUtil.getUsernameFromToken(jwt);
-            } catch (ExpiredJwtException e) {
-                log.debug("The token is expired.");
-            }
-        }
+//        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+//            jwt = authHeader.substring(7);
+//            //log.info(String.format("Token: %s", jwt));
+//            try {
+//                username = jwtTokenUtil.getUsernameFromToken(jwt);
+//            } catch (ExpiredJwtException e) {
+//                log.debug("The token is expired.");
+//            }
+//        }
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 //            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
@@ -54,10 +54,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
             // но эта информация берётся из базы.
 
 
-            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
-                    username, null, jwtTokenUtil.getRoles(jwt).stream()
-                    .map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
-            SecurityContextHolder.getContext().setAuthentication(token);
+//            UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
+//                    username, null, jwtTokenUtil.getRoles(jwt).stream()
+//                    .map(SimpleGrantedAuthority::new).collect(Collectors.toList()));
+//            SecurityContextHolder.getContext().setAuthentication(token);
             // Вариант, берущий информацию о пользователе из самого токена.
             // Не требует обращения к БД.
         }

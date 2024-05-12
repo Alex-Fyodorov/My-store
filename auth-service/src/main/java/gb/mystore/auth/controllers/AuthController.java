@@ -1,10 +1,10 @@
-package gb.mystore.core.controllers;
+package gb.mystore.auth.controllers;
 
 import gb.mystore.api.dtos.JwtRequest;
 import gb.mystore.api.dtos.JwtResponse;
-import gb.mystore.core.exceptions.AppError;
-import gb.mystore.core.services.UserService;
-import gb.mystore.core.utils.JwtTokenUtil;
+import gb.mystore.auth.exceptions.AppError;
+import gb.mystore.auth.services.UserService;
+import gb.mystore.auth.utils.JwtTokenUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
