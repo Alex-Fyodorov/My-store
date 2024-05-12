@@ -7,14 +7,12 @@ import gb.mystore.core.entities.User;
 import gb.mystore.core.services.UserService;
 import gb.mystore.core.validators.UserValidator;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/users")
+@CrossOrigin("*")
 public class UserController {
     private final UserService userService;
     private final UserConverter userConverter;

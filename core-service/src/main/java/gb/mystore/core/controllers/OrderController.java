@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/orders")
+@CrossOrigin("*")
 public class OrderController {
     private final OrderService orderService;
     private final CartServiceIntegration cartServiceIntegration;
