@@ -204,10 +204,14 @@ function ($scope, $rootScope, $http, $localStorage) {
 
 // Оформить заказ
     $scope.placeAnOrder = function() {
-        $http.get(contextPathCore + '/orders/create').then(function(response) {
-            $scope.loadCart();
-            $scope.loadOrders();
-        });
+        $http.get(contextPathCore + '/orders/create')
+            .then(function successCallback(response) {
+                $scope.loadCart();
+                $scope.loadOrders();
+            }, function errorCallback(response) {
+                console.log(response);
+                alert("Cart is empty!");
+            });
     }
 
 // Загрузить список заказов

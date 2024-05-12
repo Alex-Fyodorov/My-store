@@ -23,4 +23,10 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(new FieldsValidationError(HttpStatus.BAD_REQUEST.value(),
                 exception.getErrorFieldsMessages()), HttpStatus.BAD_REQUEST);
     }
+
+    public ResponseEntity<AppError> catchIllegalStateException(IllegalStateException exception) {
+        log.error(exception.getMessage(), exception);
+        return new ResponseEntity<>(new AppError(HttpStatus.BAD_REQUEST.value(),
+                exception.getMessage()), HttpStatus.BAD_REQUEST);
+    }
 }

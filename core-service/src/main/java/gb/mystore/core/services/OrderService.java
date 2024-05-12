@@ -34,6 +34,7 @@ public class OrderService {
 
     @Transactional
     public Order save(String username, CartDto cartDto) {
+        if (cartDto.getItems().isEmpty()) throw new IllegalStateException("Cart is empty.");
         Order order = new Order();
         User user = userService.findByUsername(username).orElseThrow(() ->
                 new UsernameNotFoundException(String.format(
