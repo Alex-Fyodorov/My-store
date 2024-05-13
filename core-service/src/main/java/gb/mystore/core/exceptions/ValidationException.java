@@ -1,12 +1,13 @@
 package gb.mystore.core.exceptions;
 
 import lombok.Data;
+import lombok.Getter;
 
 import java.util.List;
 
-@Data
+@Getter
 public class ValidationException extends RuntimeException {
-    private List<String> errorFieldsMessages;
+    private final List<String> errorFieldsMessages;
 
     public ValidationException(List<String> errorFieldsMessages) {
         super(String.join("; ", errorFieldsMessages));

@@ -19,7 +19,8 @@ public class OrderConverter {
         List<OrderItemDto> orderItemDtos = order.getOrderItems().stream()
                 .map(this::getItemDtoFromItemEntity).collect(Collectors.toList());
         return new OrderDto(order.getId(),
-                order.getUser().getUsername(),
+                //order.getUser().getUsername(),
+                order.getUsername(),
                 order.getTotalPrice(),
                 orderItemDtos,
                 order.getCreatedAt());
@@ -39,7 +40,8 @@ public class OrderConverter {
         Date date = order.getCreatedAt();
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         return new OrderDtoWithoutItems(order.getId(),
-                order.getUser().getUsername(),
+                //order.getUser().getUsername(),
+                order.getUsername(),
                 order.getTotalPrice(),
                 format.format(date));
     }

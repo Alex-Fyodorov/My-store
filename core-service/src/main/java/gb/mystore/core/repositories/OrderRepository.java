@@ -12,6 +12,6 @@ import java.util.List;
 public interface OrderRepository extends CrudRepository<Order, Long> {
 
     @Transactional
-    @Query("select o from Order o where o.user.username = :username")
+    @Query("select o from Order o where o.username = :username")
     List<Order> findByUserName(String username);
 }

@@ -5,12 +5,12 @@ import gb.mystore.api.dtos.CartItemDto;
 import gb.mystore.core.entities.Order;
 import gb.mystore.core.entities.OrderItem;
 import gb.mystore.core.entities.Product;
-import gb.mystore.core.entities.User;
+//import gb.mystore.core.entities.User;
 import gb.mystore.core.exceptions.ResourceNotFoundException;
 import gb.mystore.core.repositories.OrderRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+//import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
-    private final UserService userService;
+    //private final UserService userService;
     private final ProductService productService;
 
     public List<Order> findByUserName(String username) {
@@ -36,10 +36,11 @@ public class OrderService {
     public Order save(String username, CartDto cartDto) {
         if (cartDto.getItems().isEmpty()) throw new IllegalStateException("Cart is empty.");
         Order order = new Order();
-        User user = userService.findByUsername(username).orElseThrow(() ->
-                new UsernameNotFoundException(String.format(
-                        "User %s not found.", username)));
-        order.setUser(user);
+//        User user = userService.findByUsername(username).orElseThrow(() ->
+//                new UsernameNotFoundException(String.format(
+//                        "User %s not found.", username)));
+        //order.setUser(user);
+        order.setUsername("user");
         order.setTotalPrice(cartDto.getTotalPrice());
         List<OrderItem> orderItems = new ArrayList<>();
         for (CartItemDto item : cartDto.getItems()) {

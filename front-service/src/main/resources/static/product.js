@@ -1,7 +1,7 @@
 angular.module('appProduct', ['ngStorage']).controller('productController',
 function ($scope, $rootScope, $http, $localStorage) {
-    const contextPathCore = 'http://localhost:8190/my-store-core/api/v1';
-    const contextPathCart = 'http://localhost:8191/cart/api/v1/current-cart';
+    const contextPathCore = 'http://localhost:5555/core/api/v1';
+    const contextPathCart = 'http://localhost:5555/cart/api/v1/current-cart';
 
 //При перезагрузке заставляет снова подвязывать токен к запросам
     if ($localStorage.springWebUser) {
@@ -22,7 +22,7 @@ function ($scope, $rootScope, $http, $localStorage) {
 
 //Вход в учётную запись
     $scope.tryToAuth = function() {
-        $http.post('http://localhost:8190/my-store-core/auth', $scope.user)
+        $http.post('http://localhost:5555/auth/authenticate', $scope.user)
             .then(function successCallback(response) {
                 if (response.data.token) {
                     $http.defaults.headers.common.Authorization = 'Bearer ' + response.data.token;
@@ -65,7 +65,7 @@ function ($scope, $rootScope, $http, $localStorage) {
 
 //Регистрация нового пользователя
     $scope.tryToRegistration = function() {
-        $http.post(contextPathCore + '/users', $scope.user)
+        $http.post('http://localhost:5555/auth/api/v1/users', $scope.user)
             .then(function successCallback(response) {
                 $rootScope.isNeedNewUser = false;
                 $scope.tryToAuth();
