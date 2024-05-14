@@ -16,22 +16,21 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/orders")
-@CrossOrigin("*")
 public class OrderController {
     private final OrderService orderService;
     private final CartServiceIntegration cartServiceIntegration;
     private final OrderConverter orderConverter;
 
     @GetMapping("/create")
-    public OrderDto createNewOrder(Principal principal) {
-        Order order = orderService.save(principal.getName(), cartServiceIntegration.getCart());
+    public OrderDto createNewOrder(@RequestHeader String username) {
+        Order order = orderService.save(username, cartServiceIntegration.getCart());
         cartServiceIntegration.clearCart();
         return orderConverter.getOrderDtoFromOrderEntity(order);
     }
 
     @GetMapping
-    public List<OrderDtoWithoutItems> getOrders(Principal principal) {
-        return orderService.findByUserName(principal.getName()).stream()
+    public List<OrderDtoWithoutItems> getOrders(@RequestHeader String username) {
+        return orderService.findByUserName(username).stream()
                 .map(orderConverter::getOrderDtoWithoutItems)
                 .collect(Collectors.toList());
     }

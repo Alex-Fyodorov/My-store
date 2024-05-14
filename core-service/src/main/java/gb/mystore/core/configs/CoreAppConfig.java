@@ -1,6 +1,7 @@
 package gb.mystore.core.configs;
 
 import gb.mystore.core.properties.CartServiceIntegrationProperties;
+import gb.mystore.core.properties.UserServiceIntegrationProperties;
 import io.netty.channel.ChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import io.netty.handler.timeout.WriteTimeoutHandler;
@@ -17,24 +18,46 @@ import java.util.concurrent.TimeUnit;
 
 @Configuration
 @RequiredArgsConstructor
-@EnableConfigurationProperties(CartServiceIntegrationProperties.class)
+@EnableConfigurationProperties({CartServiceIntegrationProperties.class,
+        UserServiceIntegrationProperties.class})
 public class CoreAppConfig {
-    private final CartServiceIntegrationProperties properties;
+    private final CartServiceIntegrationProperties cartServiceIntegrationProperties;
+    private final UserServiceIntegrationProperties userServiceIntegrationProperties;
 
     @Bean
     public WebClient cartServiceWebClient() {
         TcpClient tcpClient = TcpClient
                 .create()
-                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, properties.getConnectTimeout())
+                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS,
+                        cartServiceIntegrationProperties.getConnectTimeout())
                 .doOnConnected(connection -> {
                     connection.addHandlerLast(new ReadTimeoutHandler(
-                            properties.getReadTimeout(), TimeUnit.MILLISECONDS));
+                            cartServiceIntegrationProperties.getReadTimeout(), TimeUnit.MILLISECONDS));
                     connection.addHandlerLast(new WriteTimeoutHandler(
-                            properties.getWriteTimeout(), TimeUnit.MILLISECONDS));
+                            cartServiceIntegrationProperties.getWriteTimeout(), TimeUnit.MILLISECONDS));
                 });
         return WebClient
                 .builder()
-                .baseUrl(properties.getUrl())
+                .baseUrl(cartServiceIntegrationProperties.getUrl())
+                .clientConnector(new ReactorClientHttpConnector(HttpClient.from(tcpClient)))
+                .build();
+    }
+
+    @Bean
+    public WebClient userServiceWebClient() {
+        TcpClient tcpClient = TcpClient
+                .create()
+                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS,
+                        userServiceIntegrationProperties.getConnectTimeout())
+                .doOnConnected(connection -> {
+                    connection.addHandlerLast(new ReadTimeoutHandler(
+                            userServiceIntegrationProperties.getReadTimeout(), TimeUnit.MILLISECONDS));
+                    connection.addHandlerLast(new WriteTimeoutHandler(
+                            userServiceIntegrationProperties.getWriteTimeout(), TimeUnit.MILLISECONDS));
+                });
+        return WebClient
+                .builder()
+                .baseUrl(userServiceIntegrationProperties.getUrl())
                 .clientConnector(new ReactorClientHttpConnector(HttpClient.from(tcpClient)))
                 .build();
     }

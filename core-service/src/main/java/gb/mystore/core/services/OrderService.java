@@ -7,6 +7,7 @@ import gb.mystore.core.entities.OrderItem;
 import gb.mystore.core.entities.Product;
 //import gb.mystore.core.entities.User;
 import gb.mystore.core.exceptions.ResourceNotFoundException;
+import gb.mystore.core.integrations.UserServiceIntegration;
 import gb.mystore.core.repositories.OrderRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -21,8 +22,8 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderRepository orderRepository;
-    //private final UserService userService;
     private final ProductService productService;
+    private final UserServiceIntegration userServiceIntegration;
 
     public List<Order> findByUserName(String username) {
         return orderRepository.findByUserName(username);
@@ -36,11 +37,8 @@ public class OrderService {
     public Order save(String username, CartDto cartDto) {
         if (cartDto.getItems().isEmpty()) throw new IllegalStateException("Cart is empty.");
         Order order = new Order();
-//        User user = userService.findByUsername(username).orElseThrow(() ->
-//                new UsernameNotFoundException(String.format(
-//                        "User %s not found.", username)));
-        //order.setUser(user);
-        order.setUsername("user");
+
+        order.setUsername(userServiceIntegration.getUserByUsername(username));
         order.setTotalPrice(cartDto.getTotalPrice());
         List<OrderItem> orderItems = new ArrayList<>();
         for (CartItemDto item : cartDto.getItems()) {

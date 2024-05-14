@@ -14,6 +14,7 @@ import java.net.URISyntaxException;
 @RequiredArgsConstructor
 public class CartServiceIntegration {
     private final WebClient cartServiceWebClient;
+
     public CartDto getCart() {
         return cartServiceWebClient.get()
                 .uri("api/v1/current-cart")
@@ -23,7 +24,7 @@ public class CartServiceIntegration {
     }
 
     public void clearCart() {
-        cartServiceWebClient.get()
+        cartServiceWebClient.delete()
                 .uri("api/v1/current-cart/clear")
                 //.header("username", username)
                 .retrieve()
