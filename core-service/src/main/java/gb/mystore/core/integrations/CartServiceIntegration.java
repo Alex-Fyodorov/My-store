@@ -21,4 +21,15 @@ public class CartServiceIntegration {
     public void clearCart() {
         restTemplate.delete("http://localhost:8191/cart/api/v1/current-cart/clear");
     }
+
+
+
+//    public void clear(String username) {
+//        cartServiceWebClient.get()
+//                .uri("api/v1/cart/0/clear")
+//                .header("username", username)
+//                .retrieve()
+//                .toBodilessEntity()
+//                .block();
+//    }
 }
