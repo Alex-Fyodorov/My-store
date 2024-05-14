@@ -1,9 +1,11 @@
 package gb.mystore.core.integrations;
 
 import gb.mystore.api.dtos.CartDto;
+import gb.mystore.api.dtos.ProductDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -11,25 +13,21 @@ import java.net.URISyntaxException;
 @Component
 @RequiredArgsConstructor
 public class CartServiceIntegration {
-    private final RestTemplate restTemplate;
-
+    private final WebClient cartServiceWebClient;
     public CartDto getCart() {
-        return restTemplate.getForObject(
-                "http://localhost:8191/cart/api/v1/current-cart", CartDto.class);
+        return cartServiceWebClient.get()
+                .uri("api/v1/current-cart")
+                .retrieve()
+                .bodyToMono(CartDto.class)
+                .block();
     }
 
     public void clearCart() {
-        restTemplate.delete("http://localhost:8191/cart/api/v1/current-cart/clear");
+        cartServiceWebClient.get()
+                .uri("api/v1/current-cart/clear")
+                //.header("username", username)
+                .retrieve()
+                .toBodilessEntity()
+                .block();
     }
-
-
-
-//    public void clear(String username) {
-//        cartServiceWebClient.get()
-//                .uri("api/v1/cart/0/clear")
-//                .header("username", username)
-//                .retrieve()
-//                .toBodilessEntity()
-//                .block();
-//    }
 }
