@@ -1,7 +1,7 @@
 server:
   port: 8187
   servlet:
-    context-path: /my-store-auth
+    context-path: /my-market-auth
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver

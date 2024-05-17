@@ -1,7 +1,7 @@
 server:
   port: 8190
   servlet:
-    context-path: /my-store-core
+    context-path: /my-market-core
 
 spring:
   datasource:
@@ -23,12 +23,12 @@ spring:
 
 integrations:
   cart-service:
-    url: http://localhost:8191/my-store-cart/
+    url: http://localhost:8191/my-market-cart/
     connect-timeout: 5000
     read-timeout: 25000
     write-timeout: 5000
   user-service:
-    url: http://localhost:8187/my-store-auth/
+    url: http://localhost:8187/my-market-auth/
     connect-timeout: 5000
     read-timeout: 25000
     write-timeout: 5000

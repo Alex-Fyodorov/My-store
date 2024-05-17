@@ -3,11 +3,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>geekbrains</groupId>
-	<artifactId>my-store</artifactId>
+	<groupId>ru.gb</groupId>
+	<artifactId>my.market</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>my-store</name>
+	<name>my-market</name>
 	<description>Demo project for Spring Boot</description>
 	<modules>
 		<module>core-service</module>
@@ -16,6 +16,8 @@
         <module>front-service</module>
         <module>auth-service</module>
         <module>gateway-service</module>
+		<module>api</module>
+        <module>api</module>
     </modules>
 
 </project>

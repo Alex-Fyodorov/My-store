@@ -1,17 +1,20 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
-    <groupId>geekbrains</groupId>
-    <artifactId>api</artifactId>
-    <packaging>jar</packaging>
-    <version>0.0.1-SNAPSHOT</version>
     <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>ru.gb</groupId>
+        <artifactId>my.market</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
 
-    <name>api</name>
-    <url>http://maven.apache.org</url>
+    <artifactId>api</artifactId>
 
     <properties>
-        <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
@@ -22,4 +25,5 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
 </project>
