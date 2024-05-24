@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="appProduct">
+<html ng-app="myMarket">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -7,7 +7,8 @@
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script>
-    <script src="product.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular-route.min.js"></script>
+    <script src="index.js"></script>
 </head>
 <body>
 <div class="row g-2" ng-controller="productController">
@@ -17,6 +18,18 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#!/">Spring Web Application</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#!/store">Catalog</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#!/cart">Cart</a>
+                    </li>
+                    <li class="nav-item" ng-show="isUserLoggedIn()">
+                        <a class="nav-link" href="#!/">My Orders</a>
+                    </li>
                     <li class="nav-item" ng-show="!isUserLoggedIn() && !isNeedToAddNewUser()">
                         <form class="align-middle" ng-submit="tryToAuth()">
                             <div class="input-group input-group-sm" style="padding: 4px;">

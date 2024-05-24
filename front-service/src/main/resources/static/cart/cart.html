@@ -1,0 +1,37 @@
+<div>
+    <p></p>
+    <!--Корзина-->
+    <div class="col-sn-20 col-md-20" style="padding: 0px; margin-left: 0px;">
+        <p></p>
+        <h3>Cart Page</h3>
+        <h6>Total Price: {{totalPrice}}</h6>
+        <button class="btn btn-outline-primary btn-sm" ng-click="placeAnOrder()" ng-show="isUserLoggedIn()">Place an Order</button>
+        <button class="btn btn-outline-secondary btn-sm" ng-click="guestPlaceAnOrder()" ng-show="!isUserLoggedIn()">Place an Order</button>
+        <table class="table table-hover" cellpadding="0" cellspacing="0">
+            <tr>
+                <td>Id</td>
+                <td>Title</td>
+                <td>Price</td>
+                <td>Quantity</td>
+                <td>Sum</td>
+                <td>Function</td>
+            </tr>
+            <tbody>
+            <tr ng-repeat="c in CartList">
+                <td>{{c.productId}}</td>
+                <td>{{c.productTitle}}</td>
+                <td>{{c.pricePerProduct}}</td>
+                <td>
+                    <button class="btn btn-outline-primary btn-sm" ng-click="changeQuantity(c.productId, -1)">-</button>
+                    {{c.quantity}}
+                    <button class="btn btn-outline-primary btn-sm" ng-click="changeQuantity(c.productId, 1)">+</button>
+                </td>
+                <td>{{c.price}}</td>
+                <td>
+                    <button class="btn btn-outline-danger" ng-click="deleteFromCart(c.productId)">Delete</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

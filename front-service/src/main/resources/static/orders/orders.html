@@ -1,0 +1,21 @@
+<div>
+    <!--Заказы-->
+    <p></p>
+    <h3>Orders</h3>
+    <table class="table table-hover" cellpadding="0" cellspacing="0">
+        <tr>
+            <td>Id</td>
+            <td>Username</td>
+            <td>Total Price</td>
+            <td>Created At</td>
+        </tr>
+        <tbody>
+        <tr ng-repeat="o in OrdersList">
+            <td>{{o.id}}</td>
+            <td>{{o.username}}</td>
+            <td>{{o.totalPrice}}</td>
+            <td>{{o.createdAt}}</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
