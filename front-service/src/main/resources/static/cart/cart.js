@@ -1,9 +1,9 @@
-angular.module('myMarket').controller('cartController',
-function ($scope, $http) {
+angular.module('myMarket')
+    .controller('cartController', function ($scope, $http, $location) {
     const contextPathCore = 'http://localhost:5555/core/api/v1';
     const contextPathCart = 'http://localhost:5555/cart/api/v1/current-cart';
 
-//Изменить количество продуктов в корзине или положить продукт в корзину
+// Изменить количество продуктов в корзине или положить продукт в корзину
     $scope.changeQuantity = function (productId, delta) {
         $http({
             url:contextPathCart + '/add',
@@ -15,39 +15,53 @@ function ($scope, $http) {
         }).then(function(response) {
             $scope.loadCart();
         });
-    }
+    };
 
-//Загрузка списка корзины
+// Загрузка списка корзины
     $scope.loadCart = function () {
         $http.get(contextPathCart).then(function(response) {
             console.log(response.data);
             $scope.CartList = response.data.items;
             $scope.totalPrice = response.data.totalPrice;
         });
-    }
+    };
 
-//Удалить продукт из корзины
+// Удалить продукт из корзины
     $scope.deleteFromCart = function (productId) {
         $http.get(contextPathCart + '/delete/' + productId).then(function(response) {
             $scope.loadCart();
         });
-    }
+    };
 
-// Оформить заказ
-    $scope.placeAnOrder = function() {
-        $http.get(contextPathCore + '/orders/create')
+// Оформить заказ часть 1
+    $scope.placeAnOrderPartOne = function() {
+        if ($scope.CartList.length > 0) {
+            $location.path('/create_order');
+        } else {
+            alert("Cart is empty!");
+        }
+    };
+
+// Оформить заказ часть 2
+    $scope.placeAnOrderPartTwo = function() {
+        $http.post(contextPathCore + '/orders/create', $scope.newOrder)
             .then(function successCallback(response) {
                 $scope.loadCart();
-                $scope.loadOrders();
+                $location.path('/');
             }, function errorCallback(response) {
                 console.log(response);
-                alert("Cart is empty!");
+                if (response.data.errorFieldsMessages) {
+                    alert(response.data.errorFieldsMessages);
+                } else {
+                    alert("None of the fields are filled in!");
+                }
             });
-    }
+    };
 
+// При попытке оформить заказ, не войдя в учётную запись
     $scope.guestPlaceAnOrder = function() {
         alert('To place an order, you need to log in to your account.');
-    }
+    };
 
     $scope.loadCart();
 });

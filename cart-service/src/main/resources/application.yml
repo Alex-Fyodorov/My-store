@@ -8,3 +8,6 @@ integrations:
     connect-timeout: 5000
     read-timeout: 25000
     write-timeout: 5000
+
+user:
+  default: #DEFAULT USER#

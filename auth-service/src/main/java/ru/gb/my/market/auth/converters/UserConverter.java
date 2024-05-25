@@ -1,7 +1,7 @@
 package ru.gb.my.market.auth.converters;
 
-import ru.gb.my.market.api.dtos.NewUserDto;
-import ru.gb.my.market.api.dtos.UserDto;
+import ru.gb.my.market.api.NewUserDto;
+import ru.gb.my.market.api.UserDto;
 import ru.gb.my.market.auth.entities.Role;
 import ru.gb.my.market.auth.entities.User;
 import org.springframework.stereotype.Component;

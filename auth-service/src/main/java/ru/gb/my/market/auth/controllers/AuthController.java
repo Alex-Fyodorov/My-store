@@ -1,7 +1,7 @@
 package ru.gb.my.market.auth.controllers;
 
-import ru.gb.my.market.api.dtos.JwtRequest;
-import ru.gb.my.market.api.dtos.JwtResponse;
+import ru.gb.my.market.api.JwtRequest;
+import ru.gb.my.market.api.JwtResponse;
 import ru.gb.my.market.auth.exceptions.AppError;
 import ru.gb.my.market.auth.services.UserService;
 import ru.gb.my.market.auth.utils.JwtTokenUtil;

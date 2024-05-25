@@ -1,6 +1,6 @@
 package ru.gb.my.market.core.controllers;
 
-import ru.gb.my.market.api.dtos.CategoryDto;
+import ru.gb.my.market.api.CategoryDto;
 import ru.gb.my.market.core.converters.CategoryConverter;
 import ru.gb.my.market.core.services.CategoryService;
 import lombok.RequiredArgsConstructor;

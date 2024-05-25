@@ -1,6 +1,6 @@
 package ru.gb.my.market.auth.validators;
 
-import ru.gb.my.market.api.dtos.NewUserDto;
+import ru.gb.my.market.api.NewUserDto;
 import ru.gb.my.market.auth.services.UserService;
 import ru.gb.my.market.auth.entities.User;
 import ru.gb.my.market.auth.exceptions.ValidationException;

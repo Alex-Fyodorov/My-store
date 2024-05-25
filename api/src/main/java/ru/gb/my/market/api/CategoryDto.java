@@ -1,4 +1,4 @@
-package ru.gb.my.market.api.dtos;
+package ru.gb.my.market.api;
 
 public class CategoryDto {
     private Long id;

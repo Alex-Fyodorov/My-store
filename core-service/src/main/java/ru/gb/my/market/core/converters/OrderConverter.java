@@ -1,8 +1,8 @@
 package ru.gb.my.market.core.converters;
 
-import ru.gb.my.market.api.dtos.OrderDto;
-import ru.gb.my.market.api.dtos.OrderDtoWithoutItems;
-import ru.gb.my.market.api.dtos.OrderItemDto;
+import ru.gb.my.market.api.OrderDto;
+import ru.gb.my.market.api.OrderDtoWithoutItems;
+import ru.gb.my.market.api.OrderItemDto;
 import ru.gb.my.market.core.entities.Order;
 import ru.gb.my.market.core.entities.OrderItem;
 import org.springframework.stereotype.Component;
@@ -21,6 +21,8 @@ public class OrderConverter {
         return new OrderDto(order.getId(),
                 //order.getUser().getUsername(),
                 order.getUsername(),
+                order.getPhone(),
+                order.getAddress(),
                 order.getTotalPrice(),
                 orderItemDtos,
                 order.getCreatedAt());
@@ -42,6 +44,8 @@ public class OrderConverter {
         return new OrderDtoWithoutItems(order.getId(),
                 //order.getUser().getUsername(),
                 order.getUsername(),
+                order.getPhone(),
+                order.getAddress(),
                 order.getTotalPrice(),
                 format.format(date));
     }

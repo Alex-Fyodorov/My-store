@@ -1,6 +1,6 @@
 package ru.gb.my.market.cart.integrations;
 
-import ru.gb.my.market.api.dtos.ProductDto;
+import ru.gb.my.market.api.ProductDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;

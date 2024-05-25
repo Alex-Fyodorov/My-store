@@ -1,8 +1,7 @@
-<div>
+<div class="row g-1">
     <p></p>
     <!--Фильтры-->
     <div class="col-6 col-md-3">
-        <style>div{padding-left: 100px;}</style>
         <p></p>
         <h4>Price Filter</h4>
         <p></p>
@@ -14,7 +13,7 @@
             <input class="form-control" type="text" placeholder="Title Part" ng-model="loadProducts.title_part">
             <p></p>
             <select class="form-control" ng-model="loadProducts.category_id">
-                <!--                    <option selected>Categories</option>-->
+                <!--<option selected>Categories</option>-->
                 <option value="1">Veggies</option>
                 <option value="2">Fruits</option>
                 <option value="3">Dairy</option>
@@ -37,60 +36,62 @@
         </p>
     </div>
 
-    <!--Список продуктов-->
-    <p></p>
-    <h3>Products Page</h3>
-    <table class="table table-hover" cellpadding="0" cellspacing="0">
-        <tr>
-            <td>Id</td>
-            <td>Title</td>
-            <td>Price</td>
-            <td>Function</td>
-            <td>Category</td>
-        </tr>
-        <tbody>
-        <tr ng-repeat="p in ProductsList">
-            <td>{{p.id}}</td>
-            <td>{{p.title}}</td>
-            <td>
-                <button class="btn btn-outline-primary btn-sm" ng-click="changePrice(p.id, p.price-0.25)">-</button>
-                {{p.price}}
-                <button class="btn btn-outline-primary btn-sm" ng-click="changePrice(p.id, p.price+0.25)">+</button>
-            </td>
-            <td>
-                <button class="btn btn-outline-danger" ng-click="changeQuantity(p.id, 1)">Put in Cart</button>
-            </td>
-            <td>{{p.categoryTitle}}</td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="col-sn-20 col-md-9">
+        <!--Список продуктов-->
+        <p></p>
+        <h3>Products Page</h3>
+        <table class="table table-hover" cellpadding="0" cellspacing="0">
+            <tr>
+                <td>Id</td>
+                <td>Title</td>
+                <td>Price</td>
+                <td>Function</td>
+                <td>Category</td>
+            </tr>
+            <tbody>
+            <tr ng-repeat="p in ProductsList">
+                <td>{{p.id}}</td>
+                <td>{{p.title}}</td>
+                <td>
+                    <button class="btn btn-outline-primary btn-sm" ng-click="changePrice(p.id, p.price-0.25)">-</button>
+                    {{p.price}}
+                    <button class="btn btn-outline-primary btn-sm" ng-click="changePrice(p.id, p.price+0.25)">+</button>
+                </td>
+                <td>
+                    <button class="btn btn-outline-danger" ng-click="changeQuantity(p.id, 1)">Put in Cart</button>
+                </td>
+                <td>{{p.categoryTitle}}</td>
+            </tr>
+            </tbody>
+        </table>
 
-    <!--Кнопки страниц-->
-    <p class="btn-group" ng-repeat="n in [].constructor(totalPages) track by $index">
-        <button class="btn btn-outline-info" ng-click="page($index + 1)">{{$index + 1}}</button>
-    </p>
+        <!--Кнопки страниц-->
+        <p class="btn-group" ng-repeat="n in [].constructor(totalPages) track by $index">
+            <button class="btn btn-outline-info" ng-click="page($index + 1)">{{$index + 1}}</button>
+        </p>
 
-    <!--Добавить продукт-->
-    <p></p>
-    <h4>Add Product</h4>
-    <form novalidate class="align-middle" ng-submit="addProduct()">
-        <div class="input-group input-group-sm" style="padding: 0px;">
-            <input class="form-control" type="text" placeholder="Title" ng-model="newProduct.title"
-                   aria-describedby="inputGroup-sizing-sm" style="margin-left: 0px;">
+        <!--Добавить продукт-->
+        <p></p>
+        <h4>Add Product</h4>
+        <form novalidate class="align-middle" ng-submit="addProduct()">
+            <div class="input-group input-group-sm" style="padding: 0px;">
+                <input class="form-control" type="text" placeholder="Title" ng-model="newProduct.title"
+                       aria-describedby="inputGroup-sizing-sm" style="margin-left: 0px;">
 
-            <input class="form-control" type="number" placeholder="Price" ng-model="newProduct.price"
-                   aria-describedby="inputGroup-sizing-sm" style="margin-left: 10px;">
+                <input class="form-control" type="number" placeholder="Price" ng-model="newProduct.price"
+                       aria-describedby="inputGroup-sizing-sm" style="margin-left: 10px;">
 
-            <select class="form-control" placeholder="Price"
-                    ng-model="newProduct.categoryTitle" style="margin-left: 10px;">
-                <!--                    <option selected>Categories</option>-->
-                <option value="Veggies">Veggies</option>
-                <option value="Fruits">Fruits</option>
-                <option value="Dairy">Dairy</option>
-            </select>
+                <select class="form-control" placeholder="Price"
+                        ng-model="newProduct.categoryTitle" style="margin-left: 10px;">
+                    <!--<option selected>Categories</option>-->
+                    <option value="Veggies">Veggies</option>
+                    <option value="Fruits">Fruits</option>
+                    <option value="Dairy">Dairy</option>
+                </select>
 
-            <button type="submit" class="btn btn-outline-primary btn-sm"
-                    style="margin-left: 10px;" >Save</button>
-        </div>
-    </form>
+                <button type="submit" class="btn btn-outline-primary btn-sm"
+                        style="margin-left: 10px;" >Save</button>
+            </div>
+        </form>
+    </div>
 </div>

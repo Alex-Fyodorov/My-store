@@ -1,0 +1,18 @@
+<div>
+    <!--Вписать в заказ адрес и телефон-->
+    <p></p>
+    <h4>Making an order</h4>
+    <p></p>
+    <form novalidate class="align-middle" ng-submit="placeAnOrderPartTwo()">
+        <div class="input-group input-group-sm" style="padding: 0px;">
+            <input class="form-control" type="text" placeholder="Phone" ng-model="newOrder.phone"
+                   aria-describedby="inputGroup-sizing-sm" style="margin-left: 0px;">
+
+            <input class="form-control" type="text" placeholder="Address" ng-model="newOrder.address"
+                   aria-describedby="inputGroup-sizing-sm" style="margin-left: 10px;">
+
+            <button type="submit" class="btn btn-outline-primary btn-sm"
+                    style="margin-left: 10px;" >Place an Order</button>
+        </div>
+    </form>
+</div>

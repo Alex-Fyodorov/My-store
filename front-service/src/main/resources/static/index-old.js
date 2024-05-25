@@ -1,11 +1,15 @@
-	var marketApp = angular.module('myMarket', ['ngRoute', 'ngStorage']);
+(function () {
+    angular
+        .module('myMarket', ['ngRoute', 'ngStorage'])
+        .config(config)
+        .run(run);
 
-	marketApp.config(function($routeProvider) {
-		$routeProvider
-			.when('/', {
-				templateUrl : 'welcome/welcome.html',
-				controller  : 'welcomeController'
-			})
+    function config($routeProvider) {
+        $routeProvider
+            .when('/', {
+                templateUrl: 'welcome/welcome.html',
+                controller: 'welcomeController'
+            })
             .when('/store', {
                 templateUrl: 'products/products.html',
                 controller: 'productController'
@@ -21,10 +25,10 @@
             .otherwise({
                 redirectTo: '/'
             });
-	});
+    }
 
 //При перезагрузке заставляет снова подвязывать токен к запросам
-    marketApp.run(function ($rootScope, $http, $localStorage) {
+    function run($rootScope, $http, $localStorage) {
         if ($localStorage.springWebUser) {
             try {
                 let jwt = $localStorage.springWebUser.token;
@@ -50,10 +54,14 @@
 //                    });
 //            }
         }
-    });
+    }
+})();
 
 
-    marketApp.controller('indexController',
+
+angular
+    .module('myMarket', ['ngStorage'])
+    .controller('indexController',
         function ($scope, $rootScope, $http, $localStorage, $location) {
     const contextPathCore = 'http://localhost:5555/core/api/v1';
     const contextPathCart = 'http://localhost:5555/cart/api/v1/current-cart';

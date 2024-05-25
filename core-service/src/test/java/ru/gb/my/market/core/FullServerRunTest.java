@@ -1,6 +1,6 @@
 package ru.gb.my.market.core;
 
-import ru.gb.my.market.api.dtos.CategoryDto;
+import ru.gb.my.market.api.CategoryDto;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,6 +1,6 @@
 package ru.gb.my.market.auth;
 
-import ru.gb.my.market.api.dtos.JwtRequest;
+import ru.gb.my.market.api.JwtRequest;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

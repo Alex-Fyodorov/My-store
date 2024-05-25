@@ -1,7 +1,7 @@
 package ru.gb.my.market.core.validators;
 
 import ru.gb.my.market.core.exceptions.ValidationException;
-import ru.gb.my.market.api.dtos.ProductDto;
+import ru.gb.my.market.api.ProductDto;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;

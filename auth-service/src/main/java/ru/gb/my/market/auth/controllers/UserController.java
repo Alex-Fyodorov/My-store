@@ -1,7 +1,7 @@
 package ru.gb.my.market.auth.controllers;
 
-import ru.gb.my.market.api.dtos.NewUserDto;
-import ru.gb.my.market.api.dtos.UserDto;
+import ru.gb.my.market.api.NewUserDto;
+import ru.gb.my.market.api.UserDto;
 import ru.gb.my.market.auth.converters.UserConverter;
 import ru.gb.my.market.auth.entities.User;
 import ru.gb.my.market.auth.exceptions.ResourceNotFoundException;
@@ -26,8 +26,6 @@ public class UserController {
         User user = userConverter.newUserDtoToEntity(newUserDto);
         return userConverter.entityToDto(userService.saveNewUser(user));
     }
-
-// Метод ниже не используется.
 
     @GetMapping
     public String getUserByUsername(@RequestHeader String username) {

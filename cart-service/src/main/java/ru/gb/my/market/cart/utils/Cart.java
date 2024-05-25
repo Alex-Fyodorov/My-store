@@ -1,19 +1,23 @@
 package ru.gb.my.market.cart.utils;
 
-import ru.gb.my.market.api.dtos.ProductDto;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import ru.gb.my.market.api.ProductDto;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 public class Cart {
     private List<CartItem> items;
     private BigDecimal totalPrice;
+
+    public Cart() {
+        this.items = new ArrayList<>();
+        this.totalPrice = BigDecimal.ZERO;
+    }
 
     public void changeQuantity(ProductDto product, Integer delta) {
         for (CartItem item : items) {

@@ -1,30 +1,30 @@
-angular.module('myMarket').controller('productController',
-function ($scope, $http) {
+angular.module('myMarket')
+    .controller('productController', function ($scope, $http) {
     const contextPathCore = 'http://localhost:5555/core/api/v1';
     const contextPathCart = 'http://localhost:5555/cart/api/v1/current-cart';
 
-//Обнуление фильтров
+// Обнуление фильтров
     $scope.reset = function () {
         $scope.loadProducts.title_part = null;
         $scope.loadProducts.min_price = null;
         $scope.loadProducts.max_price = null;
         $scope.loadProducts.category_id = null;
         $scope.loadProducts();
-    }
+    };
 
-//Сортировка
+// Сортировка
     $scope.sort = function (s) {
         $scope.loadProducts.sort = s;
         $scope.loadProducts();
-    }
+    };
 
-//Переключение страниц
+// Переключение страниц
     $scope.page = function (p) {
     $scope.loadProducts.page = p;
     $scope.loadProducts();
-    }
+    };
 
-//Загрузка списка категорий
+// Загрузка списка категорий
     $scope.loadCategories = function() {
         $http.get(contextPathCore + '/categories')
             .then(function(response) {
@@ -33,7 +33,7 @@ function ($scope, $http) {
             });
     };
 
-//Загрузка списка продуктов
+// Загрузка списка продуктов
     $scope.loadProducts = function () {
         $http({
             url: contextPathCore + '/products',
@@ -51,25 +51,25 @@ function ($scope, $http) {
             $scope.ProductsList = response.data.content;
             $scope.totalPages = response.data.totalPages;
         });
-    }
+    };
 
-//Добавить продукт
+// Добавить продукт
     $scope.addProduct = function () {
         $http.post(contextPathCore + '/products', $scope.newProduct)
             .then(function(response) {
                 $scope.loadProducts();
                 $scope.newProduct = null;
             });
-    }
+    };
 
-//Удалить продукт
+// Удалить продукт
     $scope.deleteProduct = function (productId) {
         $http.delete(contextPathCore + '/products/' + productId).then(function(response) {
             $scope.loadProducts();
         });
-    }
+    };
 
-//Изменить цену продукта
+// Изменить цену продукта
     $scope.changePrice = function (productId, newPrice) {
         $http({
             url:contextPathCore + '/products',
@@ -80,12 +80,11 @@ function ($scope, $http) {
             }
         }).then(function(response) {
             console.log(productId, newPrice);
-            //console.log(newPrice);
             $scope.loadProducts();
         });
-    }
+    };
 
-//Изменить количество продуктов в корзине или положить продукт в корзину
+// Изменить количество продуктов в корзине или положить продукт в корзину
     $scope.changeQuantity = function (productId, delta) {
         $http({
             url:contextPathCart + '/add',
@@ -95,9 +94,9 @@ function ($scope, $http) {
                 delta: delta
             }
         }).then(function(response) {
-            $scope.loadCart();
+            console.log(response);
         });
-    }
+    };
 
     $scope.loadCategories();
     $scope.loadProducts();

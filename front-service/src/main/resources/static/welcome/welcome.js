@@ -1,4 +1,2 @@
-angular.module('myMarket').controller('welcomeController',
-function ($scope, $http) {});
-
-
+angular.module('myMarket')
+    .controller('welcomeController', function ($scope, $http) {});

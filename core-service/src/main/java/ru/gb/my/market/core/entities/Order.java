@@ -26,6 +26,12 @@ public class Order {
     @Column(name = "username")
     private String username;
 
+    @Column(name = "phone")
+    private String phone;
+
+    @Column(name = "address")
+    private String address;
+
     @Column(name = "total_price")
     private BigDecimal totalPrice;
 

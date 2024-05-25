@@ -1,25 +1,45 @@
-package ru.gb.my.market.api.dtos;
+package ru.gb.my.market.api;
 
 import java.math.BigDecimal;
+import java.util.Date;
 
-public class CartItemDto {
+public class OrderItemDto {
+
+    private Long id;
+    private Long orderId;
     private Long productId;
     private String productTitle;
     private BigDecimal pricePerProduct;
     private Integer quantity;
     private BigDecimal price;
 
-    public CartItemDto() {
+    public OrderItemDto() {
     }
 
-    public CartItemDto(Long productId, String productTitle,
-                       BigDecimal pricePerProduct, Integer quantity,
-                       BigDecimal price) {
+    public OrderItemDto(Long id, Long orderId, Long productId, String productTitle, BigDecimal pricePerProduct, Integer quantity, BigDecimal price) {
+        this.id = id;
+        this.orderId = orderId;
         this.productId = productId;
         this.productTitle = productTitle;
         this.pricePerProduct = pricePerProduct;
         this.quantity = quantity;
         this.price = price;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 
     public Long getProductId() {

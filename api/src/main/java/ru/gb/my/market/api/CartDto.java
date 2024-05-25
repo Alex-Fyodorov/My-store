@@ -1,4 +1,4 @@
-package ru.gb.my.market.api.dtos;
+package ru.gb.my.market.api;
 
 import java.math.BigDecimal;
 import java.util.List;

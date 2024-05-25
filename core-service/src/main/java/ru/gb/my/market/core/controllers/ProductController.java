@@ -1,6 +1,6 @@
 package ru.gb.my.market.core.controllers;
 
-import ru.gb.my.market.api.dtos.ProductDto;
+import ru.gb.my.market.api.ProductDto;
 import ru.gb.my.market.core.converters.ProductConverter;
 import ru.gb.my.market.core.exceptions.ResourceNotFoundException;
 import ru.gb.my.market.core.entities.Product;

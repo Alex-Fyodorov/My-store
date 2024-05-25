@@ -1,5 +1,5 @@
-angular.module('myMarket').controller('orderController',
-function ($scope, $http) {
+angular.module('myMarket')
+    .controller('orderController', function ($scope, $http) {
     const contextPathCore = 'http://localhost:5555/core/api/v1';
 
 // Загрузить список заказов

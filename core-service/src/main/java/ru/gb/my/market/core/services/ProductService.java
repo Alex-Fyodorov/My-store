@@ -2,7 +2,7 @@ package ru.gb.my.market.core.services;
 
 import ru.gb.my.market.core.entities.Category;
 import ru.gb.my.market.core.exceptions.ResourceNotFoundException;
-import ru.gb.my.market.api.dtos.ProductDto;
+import ru.gb.my.market.api.ProductDto;
 import ru.gb.my.market.core.entities.Product;
 import ru.gb.my.market.core.repositories.ProductRepository;
 import ru.gb.my.market.core.repositories.specifications.ProductSpecification;

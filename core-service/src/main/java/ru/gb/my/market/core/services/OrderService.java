@@ -1,7 +1,7 @@
 package ru.gb.my.market.core.services;
 
-import ru.gb.my.market.api.dtos.CartDto;
-import ru.gb.my.market.api.dtos.CartItemDto;
+import ru.gb.my.market.api.CartDto;
+import ru.gb.my.market.api.CartItemDto;
 import ru.gb.my.market.core.entities.Order;
 import ru.gb.my.market.core.entities.OrderItem;
 import ru.gb.my.market.core.entities.Product;
@@ -34,11 +34,13 @@ public class OrderService {
     }
 
     @Transactional
-    public Order save(String username, CartDto cartDto) {
+    public Order save(String username, String phone, String address, CartDto cartDto) {
         if (cartDto.getItems().isEmpty()) throw new IllegalStateException("Cart is empty.");
         Order order = new Order();
 
         order.setUsername(userServiceIntegration.getUserByUsername(username));
+        order.setPhone(phone);
+        order.setAddress(address);
         order.setTotalPrice(cartDto.getTotalPrice());
         List<OrderItem> orderItems = new ArrayList<>();
         for (CartItemDto item : cartDto.getItems()) {
