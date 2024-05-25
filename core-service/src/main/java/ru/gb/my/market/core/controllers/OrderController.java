@@ -22,12 +22,13 @@ public class OrderController {
     private final OrderConverter orderConverter;
     private final OrderValidator orderValidator;
 
-    @PostMapping("/create")
+    @PostMapping("/create/{cartId}")
     public OrderDto createNewOrder(@RequestHeader String username,
+                                   @PathVariable String cartId,
                                    @RequestBody OrderDtoWithoutItems orderDto) {
         orderValidator.validate(orderDto);
         Order order = orderService.save(username, orderDto.getPhone(),
-                orderDto.getAddress(), cartServiceIntegration.getCart(username));
+                orderDto.getAddress(), cartServiceIntegration.getCart(username, cartId));
         cartServiceIntegration.clearCart(username);
         return orderConverter.getOrderDtoFromOrderEntity(order);
     }

@@ -11,59 +11,59 @@ import ru.gb.my.market.cart.utils.Cart;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class CartService {
     private final ProductServiceIntegration productService;
     private Map<String, Cart> carts;
-    @Value("${user.default}")
-    private String defaultUsername;
 
     @PostConstruct
     public void init() {
         carts = new HashMap<>();
     }
 
-    public Cart getCurrentCart(String username) {
-        username = checkUsername(username);
-        return carts.get(username);
+    public Cart getCurrentCart(String cartId) {
+        checkCartId(cartId);
+        return carts.get(cartId);
     }
 
-    public void addProductToCart(String username, Long productId, Integer delta) {
-        username = checkUsername(username);
+    public void addProductToCart(String cartId, Long productId, Integer delta) {
+        checkCartId(cartId);
         ProductDto product = productService.findById(productId);
-        carts.get(username).changeQuantity(product, delta);
+        carts.get(cartId).changeQuantity(product, delta);
     }
 
-    public void deleteProduct(String username, Long productId) {
-        username = checkUsername(username);
-        carts.get(username).deleteProductFromCart(productId);
+    public void deleteProduct(String cartId, Long productId) {
+        carts.get(cartId).deleteProductFromCart(productId);
     }
 
-    public void clearCart(String username) {
-        username = checkUsername(username);
-        Cart cart = carts.get(username);
+    public void clearCart(String cartId) {
+        Cart cart = carts.get(cartId);
         cart.getItems().clear();
         cart.setTotalPrice(BigDecimal.ZERO);
     }
 
-    private String checkUsername(String username) {
+    private void checkCartId(String cartId) {
+        if (!carts.containsKey(cartId)) {
+            carts.put(cartId, new Cart());
+        }
+    }
+
+    public String selectCartId(String username, String cartId) {
         if (username == null) {
-            username = defaultUsername;
+            return cartId;
         }
-        if (!carts.containsKey(username)) {
-            Cart cart = new Cart();
-            carts.put(username, cart);
-        }
-        if (!username.equals(defaultUsername) && carts.containsKey(defaultUsername)) {
+        if (!carts.get(cartId).getItems().isEmpty()) {
+            checkCartId(username);
             Cart cartUser = carts.get(username);
-            carts.get(defaultUsername).getItems().forEach(i -> {
+            carts.get(cartId).getItems().forEach(i -> {
                 ProductDto productDto = new ProductDto(i.getProductId(),
                         i.getProductTitle(), i.getPricePerProduct(), null);
                 cartUser.changeQuantity(productDto, i.getQuantity());
             });
-            carts.remove(defaultUsername);
+            clearCart(cartId);
         }
         return username;
     }

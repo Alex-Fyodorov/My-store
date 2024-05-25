@@ -52,12 +52,13 @@ marketApp.controller('indexController',
     }
 
 // Запрос CartId при входе
-//    if (!$localStorage.myMarketGuestCartId) {
-//        $http.get(contextPathCart + '/generate_id')
-//            .then(function (response) {
-//                $localStorage.myMarketGuestCartId = response.data.value;
-//            });
-//    }
+    if (!$localStorage.myMarketGuestCartId) {
+        $http.get(contextPathCart + '/generate_id')
+            .then(function (response) {
+                console.log(response.data);
+                $localStorage.myMarketGuestCartId = response.data.value;
+            });
+    }
 
 // Вход в учётную запись
     $scope.tryToAuth = function() {

@@ -1,7 +1,7 @@
 angular.module('myMarket')
-    .controller('productController', function ($scope, $http) {
+    .controller('productController', function ($scope, $http, $localStorage) {
     const contextPathCore = 'http://localhost:5555/core/api/v1';
-    const contextPathCart = 'http://localhost:5555/cart/api/v1/current-cart';
+    const contextPathCart = 'http://localhost:5555/cart/api/v1/current-cart/';
 
 // Обнуление фильтров
     $scope.reset = function () {
@@ -87,7 +87,7 @@ angular.module('myMarket')
 // Изменить количество продуктов в корзине или положить продукт в корзину
     $scope.changeQuantity = function (productId, delta) {
         $http({
-            url:contextPathCart + '/add',
+            url:contextPathCart + $localStorage.myMarketGuestCartId + '/add',
             method: 'get',
             params: {
                 product_id: productId,

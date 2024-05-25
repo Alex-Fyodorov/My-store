@@ -1,12 +1,12 @@
 angular.module('myMarket')
-    .controller('cartController', function ($scope, $http, $location) {
+    .controller('cartController', function ($scope, $http, $location, $localStorage) {
     const contextPathCore = 'http://localhost:5555/core/api/v1';
-    const contextPathCart = 'http://localhost:5555/cart/api/v1/current-cart';
+    const contextPathCart = 'http://localhost:5555/cart/api/v1/current-cart/';
 
 // Изменить количество продуктов в корзине или положить продукт в корзину
     $scope.changeQuantity = function (productId, delta) {
         $http({
-            url:contextPathCart + '/add',
+            url:contextPathCart + $localStorage.myMarketGuestCartId + '/add',
             method: 'get',
             params: {
                 product_id: productId,
@@ -19,17 +19,19 @@ angular.module('myMarket')
 
 // Загрузка списка корзины
     $scope.loadCart = function () {
-        $http.get(contextPathCart).then(function(response) {
-            console.log(response.data);
-            $scope.CartList = response.data.items;
-            $scope.totalPrice = response.data.totalPrice;
+        $http.get(contextPathCart + $localStorage.myMarketGuestCartId)
+            .then(function(response) {
+                console.log(response.data);
+                $scope.CartList = response.data.items;
+                $scope.totalPrice = response.data.totalPrice;
         });
     };
 
 // Удалить продукт из корзины
     $scope.deleteFromCart = function (productId) {
-        $http.get(contextPathCart + '/delete/' + productId).then(function(response) {
-            $scope.loadCart();
+        $http.get(contextPathCart + $localStorage.myMarketGuestCartId + '/delete/' + productId)
+            .then(function(response) {
+                $scope.loadCart();
         });
     };
 
@@ -44,7 +46,7 @@ angular.module('myMarket')
 
 // Оформить заказ часть 2
     $scope.placeAnOrderPartTwo = function() {
-        $http.post(contextPathCore + '/orders/create', $scope.newOrder)
+        $http.post(contextPathCore + '/orders/create/' + $localStorage.myMarketGuestCartId, $scope.newOrder)
             .then(function successCallback(response) {
                 $scope.loadCart();
                 $location.path('/');
