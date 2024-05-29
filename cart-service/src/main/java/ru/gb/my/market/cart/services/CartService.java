@@ -56,15 +56,19 @@ public class CartService {
             return cartId;
         }
         if (!carts.get(cartId).getItems().isEmpty()) {
-            checkCartId(username);
-            Cart cartUser = carts.get(username);
-            carts.get(cartId).getItems().forEach(i -> {
-                ProductDto productDto = new ProductDto(i.getProductId(),
-                        i.getProductTitle(), i.getPricePerProduct(), null);
-                cartUser.changeQuantity(productDto, i.getQuantity());
-            });
-            clearCart(cartId);
+            mergeCart(username, cartId);
         }
         return username;
+    }
+
+    private void mergeCart(String username, String cartId) {
+        checkCartId(username);
+        Cart cartUser = carts.get(username);
+        carts.get(cartId).getItems().forEach(i -> {
+            ProductDto productDto = new ProductDto(i.getProductId(),
+                    i.getProductTitle(), i.getPricePerProduct(), null);
+            cartUser.changeQuantity(productDto, i.getQuantity());
+        });
+        clearCart(cartId);
     }
 }
