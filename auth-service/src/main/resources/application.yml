@@ -19,3 +19,8 @@ spring:
       enabled: true
       settings:
         web-allow-others: false
+
+starter-aspect:
+  properties:
+    enabled: true
+    log-level: info
