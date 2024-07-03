@@ -1,12 +1,21 @@
 package ru.gb.my.market.api;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.math.BigDecimal;
 
+@Schema(description = "Модель компонента, из которыз состоит содержание корзины")
 public class CartItemDto {
+
+    @Schema(description = "ID продукта", example = "1")
     private Long productId;
+    @Schema(description = "Название продукта", example = "Яблоко")
     private String productTitle;
+    @Schema(description = "Цена продукта", example = "120.00")
     private BigDecimal pricePerProduct;
+    @Schema(description = "Количество", example = "1")
     private Integer quantity;
+    @Schema(description = "Общая цена", example = "120.00")
     private BigDecimal price;
 
     public CartItemDto() {

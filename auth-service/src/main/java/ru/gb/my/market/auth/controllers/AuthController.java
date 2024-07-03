@@ -1,7 +1,13 @@
 package ru.gb.my.market.auth.controllers;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import ru.gb.my.market.api.JwtRequest;
 import ru.gb.my.market.api.JwtResponse;
+import ru.gb.my.market.api.ProductDto;
 import ru.gb.my.market.auth.exceptions.AppError;
 import ru.gb.my.market.auth.services.UserService;
 import ru.gb.my.market.auth.utils.JwtTokenUtil;
@@ -20,12 +26,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
+@Tag(name = "Аутентификация", description = "Методы работы с аутентификацией")
+// http://localhost:8187/my-market-auth/swagger-ui/index.html
 public class AuthController {
     private final UserService userService;
     private final JwtTokenUtil jwtTokenUtil;
     private final AuthenticationManager authenticationManager;
 
     @PostMapping("/authenticate")
+    @Operation(summary = "Запрос на аутентификацию",
+            responses = {
+                    @ApiResponse(
+                            description = "Успешный ответ", responseCode = "200",
+                            content = @Content(schema = @Schema(implementation = ResponseEntity.class))
+                    ),
+                    @ApiResponse(
+                            description = "Неверные имя пользователя или пароль", responseCode = "401",
+                            content = @Content(schema = @Schema(implementation = ResponseEntity.class))
+                    )
+            })
     public ResponseEntity<?> createAuthToken(@RequestBody JwtRequest authRequest) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(

@@ -1,16 +1,25 @@
 package ru.gb.my.market.api;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+@Schema(description = "Модель заказа без списка продуктов")
 public class OrderDtoWithoutItems {
 
+    @Schema(description = "ID заказа", example = "1")
     private Long id;
+    @Schema(description = "Логин покупателя", example = "Сато Кейко")
     private String username;
+    @Schema(description = "Телефон покупателя", example = "681-1268")
     private String phone;
+    @Schema(description = "Адрес покупателя", example = "ул. 3-го Интернационала, д.57, кв.166")
     private String address;
+    @Schema(description = "Цена заказа", example = "365.00")
     private BigDecimal totalPrice;
+    @Schema(description = "Дата и время создания заказа", example = "2023-07-25, 15:54")
     private String createdAt;
 
     public OrderDtoWithoutItems() {

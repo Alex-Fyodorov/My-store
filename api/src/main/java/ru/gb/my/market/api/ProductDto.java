@@ -1,11 +1,19 @@
 package ru.gb.my.market.api;
 
+import io.swagger.v3.oas.annotations.media.Schema;
+
 import java.math.BigDecimal;
 
+@Schema(description = "Модель продукта")
 public class ProductDto {
+
+    @Schema(description = "ID продукта", example = "1")
     private Long id;
+    @Schema(description = "Название продукта", example = "Яблоки", maxLength = 255, minLength = 3)
     private String title;
+    @Schema(description = "Цена продукта", example = "120.00", minimum = "1")
     private BigDecimal price;
+    @Schema(description = "Категория продукта", example = "Фрукты")
     private String categoryTitle;
 
     public ProductDto() {
