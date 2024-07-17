@@ -1,0 +1,81 @@
+{
+  "mappings": [
+    {
+      "request": {
+        "method": "POST",
+        "urlPath": "/authenticate"
+      },
+      "response": {
+        "status": 200,
+        "bodyFileName": "jwt-token.json",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "fixedDelayMilliseconds": 0
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "queryParameters": {
+          "min_price": {
+            "equalTo": 11
+          }
+        },
+        "urlPath": "/api/v1/products"
+      },
+      "response": {
+        "status": 200,
+        "bodyFileName": "get-first-product.json",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "fixedDelayMilliseconds": 0
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "headers": {
+          "username": "user1"
+        },
+        "urlPath": "api/v1/current-cart/111"
+      },
+      "response": {
+        "status": 200,
+        "bodyFileName": "get-current-cart.json",
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "fixedDelayMilliseconds": 0
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "headers": {
+          "username": "user1"
+        },
+        "urlPath": "api/v1/users"
+      },
+      "response": {
+        "status": 200,
+        "body": "user1",
+        "headers": {
+          "Content-Type": "text/plain"
+        },
+        "fixedDelayMilliseconds": 0
+      }
+    },
+    {
+      "request": {
+        "method": "GET",
+        "url": "/hello"
+      },
+      "response": {
+        "status": 200,
+        "body": "Hello World!"
+      }
+    }
+  ]
+}

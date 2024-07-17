@@ -23,6 +23,7 @@ spring:
             - StripPrefix=1
             - PrefixPath=/my-market-core
             - JwtAuthFilter
+#            - NotForGuestFilter
         - id: cart-service
           uri: http://localhost:8191
           predicates:
@@ -31,6 +32,7 @@ spring:
             - StripPrefix=1
             - PrefixPath=/my-market-cart
             - JwtAuthFilter
+#            - NotForGuestFilter
         - id: auth-service
           uri: http://localhost:8187
           predicates:
@@ -39,5 +41,6 @@ spring:
             - StripPrefix=1
             - PrefixPath=/my-market-auth
             - JwtAuthFilter
+#            - NotForGuestFilter
 jwt:
   secret: aKaztBKD6z66JfEuXzGvPAhuoKHXOhsRdkNKoA3wbPeRCF8Hoy

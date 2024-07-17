@@ -1,0 +1,12 @@
+{
+  "items": [
+    {
+      "productId": 5,
+      "productTitle": "Cucumber",
+      "pricePerProduct": 78,
+      "quantity": 3,
+      "price": 234
+    }
+  ],
+  "totalPrice": 200
+}

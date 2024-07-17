@@ -1,0 +1,50 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:8.2-oraclelinux8
+    domainname: mysql
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=EY9fhJLjXok5TQ%
+      - MYSQL_ROOT_HOST=%
+      - MYSQL_DATABASE=my_store_core
+#      - MYSQL_USER=admin
+#      - MYSQL_PASSWORD=admin
+    healthcheck:
+      test: [ "CMD-SHELL", "nc -z 127.0.0.1 3306 || exit 1" ]
+      interval: 1m30s
+      timeout: 60s
+      retries: 6
+#
+#
+#
+#  flyway:
+#    container_name: my-market-flyway
+#    image: boxfuse/flyway
+#    command: -url=jdbc:mysql://mysql:3306/my_store_core?verifyServerCertificate=false&useSSL=true -schemas=my_store_core -user=root -password=EY9fhJLjXok5TQ% -connectRetries=5 migrate
+#    volumes:
+#      - ./db/migration:/flyway/sql
+#    depends_on:
+#      - mysql
+
+#  redis:
+#    image: bitnami/redis
+#    environment:
+#      - ALLOW_EMPTY_PASSWORD=yes
+#    ports:
+#      - "6379:6379"
+
+#  wiremock-service:
+#    image: rodolpheche/wiremock
+##    image: wiremock/wiremock
+#    container_name: wiremock-service
+#    ports:
+#      - "8822:8080"
+#    volumes:
+#      - ./wiremock/stubs/__files/:/home/wiremock/__files/
+#      - ./wiremock/stubs/mappings/:/home/wiremock/mappings/
+#    command:
+#      - -verbose
+#      - -global-response-templating

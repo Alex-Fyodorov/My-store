@@ -9,8 +9,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class UserServiceIntegration {
     private final WebClient userServiceWebClient;
 
-// Этот класс и вся остальная интеграция core-service с auth-service пока что лишние.
-
     public String getUserByUsername(String username) {
         return userServiceWebClient.get()
                 .uri("api/v1/users")

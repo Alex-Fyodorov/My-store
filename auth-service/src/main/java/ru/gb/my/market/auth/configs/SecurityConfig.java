@@ -48,7 +48,7 @@ public class SecurityConfig {
 //                        .requestMatchers(HttpMethod.DELETE, "/api/v1/products").hasRole("ADMIN")
 //                        .requestMatchers(HttpMethod.PATCH, "/api/v1/products").hasRole("ADMIN")
 //                        .requestMatchers("api/v1/orders/**").authenticated()
-                        .requestMatchers("/auth").permitAll()
+//                        .requestMatchers("/auth").permitAll()
                         .anyRequest().permitAll())
                 .exceptionHandling(eh -> eh.authenticationEntryPoint(
                         new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))); // Обработка ошибок.

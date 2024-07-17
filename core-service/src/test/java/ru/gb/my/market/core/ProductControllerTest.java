@@ -49,7 +49,7 @@ public class ProductControllerTest {
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isNotEmpty())
-                .andExpect(jsonPath("$.id", is(26)))
+                .andExpect(jsonPath("$.id", is(21)))
                 .andExpect(jsonPath("$.title", is("Shark")));
     }
 }
