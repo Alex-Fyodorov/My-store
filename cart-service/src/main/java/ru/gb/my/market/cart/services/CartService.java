@@ -1,53 +1,48 @@
 package ru.gb.my.market.cart.services;
 
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import ru.gb.my.market.api.ProductDto;
 import ru.gb.my.market.cart.integrations.ProductServiceIntegration;
 import ru.gb.my.market.cart.utils.Cart;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
+import java.util.function.Consumer;
 
 @Service
 @RequiredArgsConstructor
 public class CartService {
     private final ProductServiceIntegration productService;
-    private Map<String, Cart> carts;
-
-    @PostConstruct
-    public void init() {
-        carts = new HashMap<>();
-    }
+    private final RedisTemplate<String, Object> redisTemplate;
 
     public Cart getCurrentCart(String cartId) {
         checkCartId(cartId);
-        return carts.get(cartId);
+        return (Cart) redisTemplate.opsForValue().get(cartId);
     }
 
     public void addProductToCart(String cartId, Long productId, Integer delta) {
         checkCartId(cartId);
-        ProductDto product = productService.findById(productId);
-        carts.get(cartId).changeQuantity(product, delta);
+        execute(cartId, cart -> {
+            ProductDto product = productService.findById(productId);
+            cart.changeQuantity(product, delta);
+        });
     }
 
     public void deleteProduct(String cartId, Long productId) {
-        carts.get(cartId).deleteProductFromCart(productId);
+        execute(cartId, cart -> cart.deleteProductFromCart(productId));
     }
 
     public void clearCart(String cartId) {
-        Cart cart = carts.get(cartId);
-        cart.getItems().clear();
-        cart.setTotalPrice(BigDecimal.ZERO);
+        execute(cartId, cart -> {
+            cart.getItems().clear();
+            cart.setTotalPrice(BigDecimal.ZERO);
+        });
     }
 
     private void checkCartId(String cartId) {
-        if (!carts.containsKey(cartId)) {
-            carts.put(cartId, new Cart());
+        if (Boolean.FALSE.equals(redisTemplate.hasKey(cartId))) {
+            redisTemplate.opsForValue().set(cartId, new Cart());
         }
     }
 
@@ -55,7 +50,8 @@ public class CartService {
         if (username == null) {
             return cartId;
         }
-        if (!carts.get(cartId).getItems().isEmpty()) {
+        Cart cart = (Cart) redisTemplate.opsForValue().get(cartId);
+        if (cart != null && !cart.getItems().isEmpty()) {
             mergeCart(username, cartId);
         }
         return username;
@@ -63,12 +59,24 @@ public class CartService {
 
     private void mergeCart(String username, String cartId) {
         checkCartId(username);
-        Cart cartUser = carts.get(username);
-        carts.get(cartId).getItems().forEach(i -> {
-            ProductDto productDto = new ProductDto(i.getProductId(),
-                    i.getProductTitle(), i.getPricePerProduct(), null);
-            cartUser.changeQuantity(productDto, i.getQuantity());
-        });
-        clearCart(cartId);
+        Cart cartUser = (Cart) redisTemplate.opsForValue().get(username);
+        Cart cartByCartId = (Cart) redisTemplate.opsForValue().get(cartId);
+        if (cartUser != null && cartByCartId != null) {
+            cartByCartId.getItems().forEach(i -> {
+                ProductDto productDto = new ProductDto(i.getProductId(),
+                        i.getProductTitle(), i.getPricePerProduct(), null);
+                cartUser.changeQuantity(productDto, i.getQuantity());
+            });
+            redisTemplate.opsForValue().set(username, cartUser);
+            clearCart(cartId);
+        }
+    }
+
+    private void execute(String cartId, Consumer<Cart> action) {
+        Cart cart = getCurrentCart(cartId);
+        if (cart != null) {
+            action.accept(cart);
+            redisTemplate.opsForValue().set(cartId, cart);
+        }
     }
 }

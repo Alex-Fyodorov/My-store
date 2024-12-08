@@ -47,3 +47,21 @@ public class ProductServiceTest {
                 .save(ArgumentMatchers.any());
     }
 }
+
+// Верификация: метод был вызван с заданными параметрами
+//    Mockito.verify(calculatorService).printSum(10.0, 20.0);
+
+// Верификация: был ли вызван метод placeOrder с testOrder
+//    Mockito.verify(orderService).placeOrder(testOrder);
+
+// Верификация: метод placeOrder был вызван дважды
+//    Mockito.verify(orderService, Mockito.times(2)).placeOrder(Mockito.any(Order.class));
+
+// Верификация: метод getOrderCount ни разу не был вызван
+//    Mockito.verify(orderService, Mockito.never()).getOrderCount();
+
+// Верификация: был ли метод вызван с определенными аргументами
+//    Mockito.verify(mockUserService).findUser(Mockito.eq("Alice"), Mockito.eq(30));
+
+// Верификация вызова метода
+//    Mockito.verify(spyListManager).getListSize(list);
