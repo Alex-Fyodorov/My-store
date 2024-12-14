@@ -1,0 +1,77 @@
+version: '3'
+
+services:
+  mysql-core:
+    container_name: my-market-core-mysql
+    image: mysql:8.2-oraclelinux8
+    domainname: mysql
+    ports:
+      - "3307:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=my_store_core
+#      - MYSQL_ROOT_HOST=%
+#      - MYSQL_USER=admin
+#      - MYSQL_PASSWORD=admin
+    healthcheck:
+      test: [ "CMD-SHELL", "nc -z 127.0.0.1 3306 || exit 1" ]
+      interval: 1m30s
+      timeout: 60s
+      retries: 6
+
+#  flyway-core:
+#    container_name: my-market-core-flyway
+#    image: boxfuse/flyway
+#    command: -url=jdbc:mysql://mysql:3306/my_store_core?verifyServerCertificate=false&useSSL=true -user=root -password=root -connectRetries=30 migrate
+#    volumes:
+#      - ./flyway/core:/flyway/sql
+#    depends_on:
+#      - mysql-core
+#
+#  mysql-auth:
+#    container_name: my-market-auth-mysql
+#    image: mysql:8.2-oraclelinux8
+#    domainname: mysql2
+#    ports:
+#      - "3308:3306"
+#    environment:
+#      - MYSQL_ROOT_PASSWORD=root
+#      - MYSQL_DATABASE=my_store_auth
+#    #      - MYSQL_ROOT_HOST=%
+#    #      - MYSQL_USER=admin
+#    #      - MYSQL_PASSWORD=admin
+#    healthcheck:
+#      test: [ "CMD-SHELL", "nc -z 127.0.0.1 3306 || exit 1" ]
+#      interval: 1m30s
+#      timeout: 60s
+#      retries: 6
+#
+#  flyway-auth:
+#    container_name: my-market-auth-flyway
+#    image: boxfuse/flyway
+#    command: -url=jdbc:mysql://mysql2:3306/my_store_auth?verifyServerCertificate=false&useSSL=true -user=root -password=root -connectRetries=30 migrate
+#    volumes:
+#      - ./flyway/auth:/flyway/sql
+#    depends_on:
+#      - mysql-auth
+
+  redis:
+    container_name: my-market-core-redis
+    image: bitnami/redis
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - "6379:6379"
+
+#  wiremock-service:
+#    container_name: my-market-core-wiremock-service
+#    image: rodolpheche/wiremock
+##    image: wiremock/wiremock
+#    ports:
+#      - "8822:8080"
+#    volumes:
+#      - ./wiremock/stubs/__files/:/home/wiremock/__files/
+#      - ./wiremock/stubs/mappings/:/home/wiremock/mappings/
+#    command:
+#      - -verbose
+#      - -global-response-templating
