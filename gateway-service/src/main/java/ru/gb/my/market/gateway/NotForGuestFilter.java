@@ -9,31 +9,32 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-//@Component
-public class NotForGuestFilter {}
-//        extends AbstractGatewayFilterFactory<NotForGuestFilter.Config> {
-//    public NotForGuestFilter() {
-//        super(Config.class);
-//    }
-//
-//    @Override
-//    public GatewayFilter apply(NotForGuestFilter.Config config) {
-//        return (exchange, chain) -> {
-//            ServerHttpRequest request = exchange.getRequest();
-//            if (!request.getHeaders().containsKey("username")) {
-//                System.out.println("Not for guests");
-//                return this.onError(exchange, "Not for guests", HttpStatus.UNAUTHORIZED);
-//            }
-//            return chain.filter(exchange);
-//        };
-//    }
-//
-//    public static class Config {
-//    }
-//
-//    private Mono<Void> onError(ServerWebExchange exchange, String err, HttpStatus httpStatus) {
-//        ServerHttpResponse response = exchange.getResponse();
-//        response.setStatusCode(httpStatus);
-//        return response.setComplete();
-//    }
-//}
+@Component
+// Фильтр безопасности гейтвея, в данном случае проверка, что пользователь вошёл.
+public class NotForGuestFilter
+        extends AbstractGatewayFilterFactory<NotForGuestFilter.Config> {
+    public NotForGuestFilter() {
+        super(Config.class);
+    }
+
+    @Override
+    public GatewayFilter apply(NotForGuestFilter.Config config) {
+        return (exchange, chain) -> {
+            ServerHttpRequest request = exchange.getRequest();
+            if (!request.getHeaders().containsKey("username")) {
+                System.out.println("Not for guests");
+                return this.onError(exchange, "Not for guests", HttpStatus.UNAUTHORIZED);
+            }
+            return chain.filter(exchange);
+        };
+    }
+
+    public static class Config {
+    }
+
+    private Mono<Void> onError(ServerWebExchange exchange, String err, HttpStatus httpStatus) {
+        ServerHttpResponse response = exchange.getResponse();
+        response.setStatusCode(httpStatus);
+        return response.setComplete();
+    }
+}
