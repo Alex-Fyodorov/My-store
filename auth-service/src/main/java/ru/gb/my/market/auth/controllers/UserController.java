@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
 import ru.gb.my.market.api.NewUserDto;
 import ru.gb.my.market.api.ProductDto;
 import ru.gb.my.market.api.UserDto;
@@ -30,6 +31,7 @@ public class UserController {
     private final UserValidator userValidator;
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Запрос на создание нового пользователя",
             responses = {
                     @ApiResponse(

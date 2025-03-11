@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
 import ru.gb.my.market.api.ProductDto;
 import ru.gb.my.market.core.converters.ProductConverter;
 import ru.gb.my.market.core.exceptions.AppError;
@@ -74,6 +75,7 @@ public class ProductController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     @Operation(summary = "Запрос на создание нового продукта",
             responses = {
                     @ApiResponse(
