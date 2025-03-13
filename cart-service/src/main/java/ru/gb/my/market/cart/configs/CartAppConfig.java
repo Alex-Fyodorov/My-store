@@ -35,6 +35,15 @@ public class CartAppConfig {
         return WebClient
                 .builder()
                 .baseUrl(properties.getUrl())
+// Так как HttpClient.from(TcpClient tcpClient) помечен как deprecated,
+// по хорошему код должен выглядеть так:
+//                .clientConnector(new ReactorClientHttpConnector(HttpClient.create().option(ChannelOption.CONNECT_TIMEOUT_MILLIS, properties.getConnectTimeout())
+//                        .doOnConnected(connection -> {
+//                            connection.addHandlerLast(new ReadTimeoutHandler(
+//                                    properties.getReadTimeout(), TimeUnit.MILLISECONDS));
+//                            connection.addHandlerLast(new WriteTimeoutHandler(
+//                                    properties.getWriteTimeout(), TimeUnit.MILLISECONDS));
+//                        })))
                 .clientConnector(new ReactorClientHttpConnector(HttpClient.from(tcpClient)))
                 .build();
     }
